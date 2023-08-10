@@ -20,8 +20,8 @@ class PostController extends Controller
     }
 
     if(request('user')) {
-        $user = User::firstWhere('name', request('user'));
-        $title = ' in ' . $user->name;
+        $user = User::firstWhere('username', request('user'));
+        $title = ' in ' . $user->username;
     }
     
     return view('posts', [

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
+use App\Models\User;
 use Cviebrock\EloquentSluggable\Sluggable;
 
 class Post extends Model
@@ -38,11 +39,12 @@ class Post extends Model
             $query->whereHas('category', function($query) use ($category) {
             $query->where('slug', $category);
         });
-    });
-    $query->when($filters['user'] ?? false, fn($query, $user) => 
-    $query->whereHas('user', fn($query) =>
-        $query->where('name', $user)
-    ));
+        });
+
+        $query->when($filters['user'] ?? false, fn($query, $user) => 
+        $query->whereHas('user', fn($query) =>
+            $query->where('username', $user)
+        ));
     }
 
     public function getRouteKeyName(): string
