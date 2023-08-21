@@ -1,3 +1,4 @@
+<h1>Klik <a href="/resources/views/home">ini</a></h1>
 <?php
 
 use Illuminate\Contracts\Http\Kernel;
