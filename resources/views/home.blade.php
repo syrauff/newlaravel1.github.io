@@ -30,4 +30,10 @@
       </div>
     </div>
     </div>
+    
+    <div id="kenal">
+      <nav></nav>
+    </div>
+
+    <script src="/js/apps.js"></script>
 @endsection

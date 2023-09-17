@@ -22,26 +22,25 @@
   </form>
   </div>
 </div>
-    @foreach ($posts as $post)
- 
-    <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title"><a href="/posts/{{$post->slug}}" class="text-decoration-none">{{ $post->title}}</a></h5>
-          <h6>By <a href="/posts?user={{$post->user->username}}" class="text-decoration-none">{{$post->user->username}}</a> in <a href="/posts?category={{$post->category->slug}}" class="text-decoration-none">{{$post->category->name}}</a></h6>
-          @if ($post->image !== null)
-          <div style="max-height: 350px; overflow:hidden">
-          <img src="{{asset ('storage/' . $post->image)}}" alt="{{$post->category->name}}" class="img-fluid mt-3">
-          </div>
-          @else
-          <img src="https://source.unsplash.com/1200x400?{{$post->category->name}}" alt="{{$post->category->name}}" class="img-fluid mt-3">
-          @endif
-          <p class="card-text">{{ $post->excerpt}}</p>
-          <a href="/posts/{{$post->slug}}">Read more..</a>
-          <p class="card-text">
-            <small class="text-muted">{{$posts[0]->created_at->diffForHumans()}}</small></p>
-        </div>
+    
+<div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
+  @foreach ($posts as $post)
+  <div class="col">
+    <div class="card h-100">
+      @if ($post->image !== null)
+      <img src="{{asset ('storage/' . $post->image)}}" class="card-img-top" alt="{{$post->category->name}}">
+      @else
+      <img src="https://source.unsplash.com/1200x700?{{$post->category->name}}" alt="{{$post->category->name}}">
+      @endif
+      <div class="card-body">
+        <h5 class="card-title">{{$post->title}}</h5>
+        <h6><a href="/posts?user={{$post->user->username}}" class="text-decoration-none">{{$post->user->username}}</a> in <a href="/posts?category={{$post->category->slug}}" class="text-decoration-none">{{$post->category->name}}</a></h6>
+        <p class="card-text">{{$post->excerpt}}</p>
+        <small class="text-muted">{{$post->created_at->diffForHumans()}}</small>
       </div>
-    @endforeach
+    </div>
+  </div>
+  @endforeach
 </div>
 
 {{$posts -> links()}}
